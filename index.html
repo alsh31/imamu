@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imamu – بوابة المذاكرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#FACC15; --on-primary:#1C1917; --accent:#A16207;
+    --bg:#FFFBEB; --fg:#1C1917; --card:#FFFFFF; --muted:#FEF3C7;
+    --muted-fg:#57534E; --border:#F5E6B8; --ring:#CA8A04;
+    --shadow:0 1px 2px rgba(28,25,23,.04), 0 8px 24px -12px rgba(120,80,0,.18);
+    --c-red:#DC2626; --c-green:#15803D; --c-blue:#2563EB;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --primary:#FACC15; --on-primary:#1C1917; --accent:#FDE047;
+      --bg:#14110A; --fg:#F5F0E1; --card:#1E1A10; --muted:#2A2414;
+      --muted-fg:#B8AE95; --border:#3A3218; --ring:#FACC15;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
+      --c-red:#F87171; --c-green:#4ADE80; --c-blue:#60A5FA;
+    }
+  }
+  :root[data-theme="dark"]{
+    --primary:#FACC15; --on-primary:#1C1917; --accent:#FDE047;
+    --bg:#14110A; --fg:#F5F0E1; --card:#1E1A10; --muted:#2A2414;
+    --muted-fg:#B8AE95; --border:#3A3218; --ring:#FACC15;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
+    --c-red:#F87171; --c-green:#4ADE80; --c-blue:#60A5FA;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,system-ui,sans-serif;
+    background-color:var(--bg); color:var(--fg);
+    background-image:
+      linear-gradient(color-mix(in srgb,var(--border) 50%,transparent) 1px,transparent 1px),
+      linear-gradient(90deg,color-mix(in srgb,var(--border) 50%,transparent) 1px,transparent 1px);
+    background-size:26px 26px;
+    font-size:16px; line-height:1.6; min-height:100vh;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:0 16px}
+
+  .topbar{border-bottom:1px solid var(--border); border-top:4px solid var(--primary); background:var(--card)}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px}
+  .brand-mark{width:38px; height:38px; border-radius:10px; display:grid; place-items:center; background:var(--primary); font-size:21px}
+  .brand small{display:block; font-weight:500; font-size:12px; color:var(--muted-fg); line-height:1.2}
+  .pill{
+    display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600;
+    color:var(--on-primary); background:var(--primary); padding:6px 12px; border-radius:999px;
+  }
+
+  .hero{padding:56px 0 32px}
+  .hero h1{font-size:clamp(28px,5vw,40px); font-weight:700; line-height:1.3; text-wrap:balance}
+  .hero h1 mark{background:linear-gradient(transparent 60%, color-mix(in srgb,var(--primary) 55%,transparent) 0); color:inherit; padding:0 4px}
+  .hero p{color:var(--muted-fg); margin-top:8px; font-size:17px; max-width:52ch}
+  .section-head{margin-bottom:16px}
+  .section-head h2{font-size:15px; font-weight:600; color:var(--muted-fg)}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; padding-bottom:48px}
+  a.card{
+    position:relative; overflow:hidden;
+    display:flex; flex-direction:column; gap:16px;
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:24px; text-decoration:none; color:inherit; cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  a.card::before{content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--c)}
+  a.card:hover{border-color:color-mix(in srgb, var(--c) 50%, var(--border)); transform:translateY(-2px)}
+  a.card:focus-visible{outline:2px solid var(--c); outline-offset:3px}
+  .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
+  .icon{
+    width:52px; height:52px; border-radius:14px; display:grid; place-items:center; flex:none;
+    font-size:28px; line-height:1;
+    background:color-mix(in srgb, var(--c) 12%, transparent);
+  }
+  .tag{
+    font-size:12px; font-weight:600; direction:ltr; white-space:nowrap;
+    color:var(--c); background:color-mix(in srgb, var(--c) 10%, transparent); border-radius:6px; padding:4px 8px;
+  }
+  .card h3{font-size:19px; font-weight:700; line-height:1.4}
+  .card p{color:var(--muted-fg); font-size:15px; flex:1}
+  .cta{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    min-height:44px; border-radius:10px; font-weight:600; font-size:15px;
+    background:var(--c); color:#fff;
+    transition:filter .2s ease;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cta{color:#0B0B0B} }
+  :root[data-theme="dark"] .cta{color:#0B0B0B}
+  a.card:hover .cta{filter:brightness(1.08)}
+  .cta svg{width:18px; height:18px; transition:transform .2s ease}
+  a.card:hover .cta svg{transform:translateX(-3px)}
+
+  footer{border-top:1px solid var(--border); padding:24px 0; color:var(--muted-fg); font-size:14px; text-align:center; background:var(--card)}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important} a.card:hover{transform:none} }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">🎓</span>
+        <span>بوابة المذاكرة<small>جامعة الإمام · imamu</small></span>
+      </div>
+      <span class="pill">3 مواد</span>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>وش بتذاكر <mark>اليوم</mark>؟</h1>
+      <p>اختر المادة وابدأ التدريب مباشرة.</p>
+    </section>
+
+    <div class="section-head"><h2>المواد</h2></div>
+
+    <div class="grid">
+      <a class="card" style="--c:var(--c-red)" href="mat1152.html">
+        <div class="card-top"><span class="icon" aria-hidden="true">🧮</span><span class="tag">MAT1152</span></div>
+        <div><h3>تدريب الميدتيرم</h3><p>أسئلة تدريبية بنمط اختبار منتصف الفصل.</p></div>
+        <span class="cta">ابدأ التدريب <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></span>
+      </a>
+
+      <a class="card" style="--c:var(--c-green)" href="calculus1.html">
+        <div class="card-top"><span class="icon" aria-hidden="true">📐</span><span class="tag">Calculus I</span></div>
+        <div><h3>تدريب التمارين</h3><p>تمارين متنوعة على مواضيع التفاضل والتكامل ١.</p></div>
+        <span class="cta">ابدأ التمارين <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></span>
+      </a>
+
+      <a class="card" style="--c:var(--c-blue)" href="micro1102.html">
+        <div class="card-top"><span class="icon" aria-hidden="true">📈</span><span class="tag">Microeconomics</span></div>
+        <div><h3>اختبار الاقتصاد الجزئي</h3><p>اختبار في مبادئ الاقتصاد الجزئي.</p></div>
+        <span class="cta">ابدأ الاختبار <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></span>
+      </a>
+    </div>
+  </main>
+
+  <footer>بالتوفيق ✨</footer>
+</body>
+</html>

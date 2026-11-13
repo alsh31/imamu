@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAT1152 – تدريب الميدتيرم</title>
+<link href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap' rel='stylesheet'>
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--ink:#1b2440;--mute:#5b6480;--line:#d9ddea;--red:#c8202f;--grn:#16794a;--rbg:#fdecee;--gbg:#e9f6ef;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151f;--card:#1b2030;--ink:#e8ebf5;--mute:#98a0b8;--line:#2d3550;--red:#ff6b78;--grn:#59c98f;--rbg:#3a1e24;--gbg:#173326;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12151f;--card:#1b2030;--ink:#e8ebf5;--mute:#98a0b8;--line:#2d3550;--red:#ff6b78;--grn:#59c98f;--rbg:#3a1e24;--gbg:#173326;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 "Segoe UI",Tahoma,system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:12px 14px 60px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
+.bar b{white-space:nowrap}.trk{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}.trk i{display:block;height:100%;width:0;background:var(--grn);transition:width .3s}
+h1{font-size:26px;margin:18px 0 4px}h2{font-size:20px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--red)}
+.sub{color:var(--mute);margin:0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.q p{margin:0 0 10px;font-weight:600;direction:ltr;text-align:left}
+.q button{display:block;width:100%;text-align:left;direction:ltr;font:inherit;color:inherit;background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:6px 0;cursor:pointer}
+.q button:hover:not(:disabled){border-color:var(--ink)}.q button:focus-visible,summary:focus-visible,.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.q button:disabled{cursor:default}.q button.ok{background:var(--gbg);border-color:var(--grn)}.q button.no{background:var(--rbg);border-color:var(--red)}
+.ex{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;border-inline-start:4px solid;font-size:15px}
+.ex.ok{display:block;background:var(--gbg);border-color:var(--grn)}.ex.no{display:block;background:var(--rbg);border-color:var(--red)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}
+summary{cursor:pointer;font-weight:600;direction:ltr;text-align:left}
+.ans{direction:ltr;text-align:left;white-space:pre-wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:15px}
+#res{text-align:center;margin-top:36px;display:none}
+#sc{display:inline-grid;place-items:center;width:120px;height:120px;border:4px solid var(--red);border-radius:50%;font-size:34px;font-weight:700;color:var(--red);transform:rotate(-6deg)}
+.btn{font:inherit;background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:10px 18px;margin:8px 4px;cursor:pointer}
+#nav{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}#nav a{color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 12px;font-size:14px}#nav a:hover{border-color:var(--ink)}#nav .btn{padding:4px 12px;margin:0;font-size:14px;border-radius:20px}
+.q textarea{width:100%;font:15px/1.6 ui-monospace,Consolas,monospace;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;margin-bottom:6px;resize:vertical}
+body:not(.go) .bar,body:not(.go) #nav,body:not(.go) #app{display:none}body.go #start{display:none}
+#start fieldset{border:1px solid var(--line);border-radius:10px;margin:14px 0;padding:8px 14px;background:var(--card)}#start legend{font-weight:700;padding:0 6px}#start label{display:block;padding:4px 0;cursor:pointer}#start select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+body{font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,system-ui,sans-serif;background-image:linear-gradient(color-mix(in srgb,var(--line) 50%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--line) 50%,transparent) 1px,transparent 1px);background-size:26px 26px}
+.hero{display:flex;align-items:center;gap:16px;margin:24px 0 16px}.hero h1{margin:0;font-size:28px}
+.code{direction:ltr;font:700 15px/1 ui-monospace,Consolas,monospace;color:var(--red);border:2px solid var(--red);border-radius:50%/60%;padding:11px 16px;transform:rotate(-4deg)}
+#start .sub{margin:16px 0 0}
+#app{counter-reset:qn}.q{counter-increment:qn;padding:16px;box-shadow:0 1px 0 var(--line)}
+.q p::before{content:counter(qn) '. ';color:var(--red);font-weight:700}
+.q button{transition:background .15s,border-color .15s;padding:11px 14px}
+.q button.ok::after,.q button.no::after{float:right;font-weight:700}.q button.ok::after{content:'✓';color:var(--grn)}.q button.no::after{content:'✗';color:var(--red)}
+.ex{animation:pop .25s ease}@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ex{animation:none}}
+.bar{box-shadow:0 2px 0 var(--line)}.trk{height:10px;border-radius:5px}
+#sc{width:140px;height:140px;font-size:38px}
+#start{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 20px 20px}
+#start fieldset{border:0;background:none;padding:0;margin:20px 0 0;min-width:0}
+#start legend{font-size:17px;font-weight:700;padding:0 0 10px}
+#start label{display:inline-flex;align-items:center;gap:8px;position:relative;margin:0 0 8px 8px;padding:9px 16px;border:1.5px solid var(--line);border-radius:24px;background:var(--bg);transition:background .15s,border-color .15s;user-select:none}
+#start label:hover{border-color:var(--ink)}
+#start label:has(input:checked){background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#start label:has(input:focus-visible){outline:3px solid var(--ink);outline-offset:2px}
+#start input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+#start label:has(input[type=checkbox]:checked)::before{content:'✓';font-weight:700}
+#start #go{width:100%;margin:22px 0 0;padding:14px;font-size:18px;font-weight:700;background:var(--red);color:var(--bg)}
+#start label small{opacity:.7;font-size:12px}#start #al{margin:0 0 8px;padding:9px 16px;border-radius:24px;background:transparent;color:var(--ink);border:1.5px dashed var(--line)}
+h2{direction:ltr;text-align:left}
+</style></head><body><style id="uupm">:root{--u-primary:#DC2626;--u-primary-2:#EF4444;--u-on-primary:#fff;--u-bg:#FEF7F7;--u-card:#fff;--u-fg:#1F0F10;--u-muted:#5B4446;--u-border:#F3DCDD;--u-soft:#FEF2F2;--u-pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23DC2626' fill-opacity='0.09' font-family='Georgia%2Cserif' font-size='24'%3E%3Ctext x='14' y='36'%3E%E2%88%80%3C/text%3E%3Ctext x='104' y='54'%3E%E2%88%83%3C/text%3E%3Ctext x='52' y='98'%3E%E2%87%92%3C/text%3E%3Ctext x='140' y='122'%3E%E2%88%88%3C/text%3E%3Ctext x='20' y='152'%3E%C2%AC%3C/text%3E%3Ctext x='96' y='168'%3E%E2%88%A7%3C/text%3E%3Ctext x='150' y='26'%3E%E2%88%AA%3C/text%3E%3C/g%3E%3C/svg%3E");--u-success:#047857;--u-success-bg:#ECFDF5;--u-danger:#B91C1C;--u-danger-bg:#FEF2F2;--u-warn:#B45309;--u-warn-bg:#FFFBEB;--u-shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -12px rgba(15,23,42,.12)}
+@media (prefers-color-scheme:dark){:root:root:root:not([data-theme="light"]){--u-primary:#F87171;--u-primary-2:#FCA5A5;--u-on-primary:#1A0B0C;--u-bg:#140C0D;--u-card:#1F1315;--u-fg:#F3E6E7;--u-muted:#B39A9C;--u-border:#3A2226;--u-soft:#3B1218;--u-pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23F87171' fill-opacity='0.1' font-family='Georgia%2Cserif' font-size='24'%3E%3Ctext x='14' y='36'%3E%E2%88%80%3C/text%3E%3Ctext x='104' y='54'%3E%E2%88%83%3C/text%3E%3Ctext x='52' y='98'%3E%E2%87%92%3C/text%3E%3Ctext x='140' y='122'%3E%E2%88%88%3C/text%3E%3Ctext x='20' y='152'%3E%C2%AC%3C/text%3E%3Ctext x='96' y='168'%3E%E2%88%A7%3C/text%3E%3Ctext x='150' y='26'%3E%E2%88%AA%3C/text%3E%3C/g%3E%3C/svg%3E");--u-success:#34D399;--u-success-bg:#052E22;--u-danger:#F87171;--u-danger-bg:#3B1218;--u-warn:#FBBF24;--u-warn-bg:#3A2A0A;--u-shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);color-scheme:dark}}
+:root:root:root[data-theme="dark"]{--u-primary:#F87171;--u-primary-2:#FCA5A5;--u-on-primary:#1A0B0C;--u-bg:#140C0D;--u-card:#1F1315;--u-fg:#F3E6E7;--u-muted:#B39A9C;--u-border:#3A2226;--u-soft:#3B1218;--u-pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23F87171' fill-opacity='0.1' font-family='Georgia%2Cserif' font-size='24'%3E%3Ctext x='14' y='36'%3E%E2%88%80%3C/text%3E%3Ctext x='104' y='54'%3E%E2%88%83%3C/text%3E%3Ctext x='52' y='98'%3E%E2%87%92%3C/text%3E%3Ctext x='140' y='122'%3E%E2%88%88%3C/text%3E%3Ctext x='20' y='152'%3E%C2%AC%3C/text%3E%3Ctext x='96' y='168'%3E%E2%88%A7%3C/text%3E%3Ctext x='150' y='26'%3E%E2%88%AA%3C/text%3E%3C/g%3E%3C/svg%3E");--u-success:#34D399;--u-success-bg:#052E22;--u-danger:#F87171;--u-danger-bg:#3B1218;--u-warn:#FBBF24;--u-warn-bg:#3A2A0A;--u-shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.6);color-scheme:dark}
+:root:root:root{--bg:var(--u-bg);--card:var(--u-card);--ink:var(--u-fg);--mute:var(--u-muted);--line:var(--u-border);--red:var(--u-danger);--grn:var(--u-success);--rbg:var(--u-danger-bg);--gbg:var(--u-success-bg);--amb:var(--u-warn);--abg:var(--u-warn-bg);--br:var(--u-primary);--br2:var(--u-primary-2);--brbg:var(--u-soft);--fin:var(--u-primary);--fbg:var(--u-soft);--pen:var(--u-primary);--pen2:var(--u-primary-2);--on:var(--u-on-primary)}
+body{font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,system-ui,sans-serif!important;background-color:var(--u-bg)!important;color:var(--u-fg)!important;background-image:linear-gradient(color-mix(in srgb,var(--line) 50%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--line) 50%,transparent) 1px,transparent 1px)!important;background-size:26px 26px!important;background-repeat:repeat!important}
+.bar{background:var(--u-bg)!important}
+.u-top{background:var(--u-card);border-bottom:1px solid var(--u-border);border-top:4px solid var(--u-primary)}
+.u-top .u-in{max-width:1040px;margin:0 auto;padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.u-back{display:inline-flex;align-items:center;gap:10px;color:var(--u-fg);text-decoration:none;font-weight:700;font-size:15px;min-height:44px;border-radius:10px;padding:0 4px;line-height:1.3}
+.u-mark{width:36px;height:36px;border-radius:10px;background:#FACC15;display:grid;place-items:center;flex:none;font-size:20px;transition:transform .2s}
+.u-back:hover .u-mark{transform:scale(1.06)}
+.u-back small{display:flex;align-items:center;gap:4px;font-weight:500;font-size:12px;color:var(--u-muted)}
+.u-tag{font:600 12px/1 ui-monospace,Consolas,monospace;direction:ltr;white-space:nowrap;color:var(--u-primary);background:var(--u-soft);padding:7px 10px;border-radius:6px}
+.u-emoji{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;flex:none;font-size:30px;line-height:1;background:var(--u-soft);border:1px solid color-mix(in srgb,var(--u-primary) 25%,transparent);font-style:normal}
+:focus-visible{outline:2px solid var(--u-primary)!important;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.btn{background:var(--u-primary);color:var(--u-on-primary);border-radius:10px;min-height:44px;font-weight:600}
+.bar{box-shadow:none}.trk i{background:var(--u-primary)}
+h2{color:var(--u-primary);border-bottom:1px solid var(--u-border)}
+.q{border-radius:14px;box-shadow:var(--u-shadow)}
+.q button{min-height:44px;border-radius:10px}
+.q button:hover:not(:disabled){border-color:var(--u-primary)}
+#sc{transform:none;border-color:var(--u-primary);color:var(--u-primary);background:var(--u-soft)}
+.hero h1{font-size:clamp(24px,5vw,32px)}
+#start{border:1px solid var(--u-border);border-radius:16px;box-shadow:var(--u-shadow)}
+
+.hero .code{transform:none;border:0;border-radius:10px;background:var(--u-soft);color:var(--u-primary);font:700 14px/1 ui-monospace,Consolas,monospace;padding:10px 12px}
+#start label{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1.5px solid var(--line);border-radius:24px;background:var(--bg);color:var(--ink);opacity:1;min-height:44px;box-shadow:none}
+#start label:hover{border-color:var(--ink)}
+#start label:has(input:checked){background:var(--ink);color:var(--bg);border-color:var(--ink);box-shadow:none}
+#start #go{width:100%;padding:14px;font-size:18px;font-weight:700;background:var(--u-primary);color:var(--bg);box-shadow:none;border-radius:12px;min-height:52px}
+#nav a{min-height:36px;display:inline-flex;align-items:center}#nav a:hover{border-color:var(--u-primary)}
+details{border-radius:14px;box-shadow:var(--u-shadow)}
+.q p::before{color:var(--u-primary)}
+.q button.ok{border-color:var(--u-success)}.q button.no{border-color:var(--u-danger)}
+</style><nav class="u-top" aria-label="التنقل"><div class="u-in"><a class="u-back" href="index.html"><span class="u-mark" aria-hidden="true">🎓</span><span>بوابة المذاكرة<small>رجوع للمواد</small></span></a><span class="u-tag">MAT1152</span></div></nav><main>
+<header class='hero'><span class='u-emoji' aria-hidden='true'>🧮</span><span class='code'>MAT1152</span><h1>تدريب الميدتيرم</h1></header>
+<section id="start"><p class='sub'>اختر ما تريد التدرب عليه ثم ابدأ. الشرح يظهر بعد كل إجابة.</p>
+<fieldset><legend>الفصول (اختر واحدًا أو أكثر)</legend>
+<label><input type="checkbox" name="ch" value="1" checked>Chapter 1: Logic</label><label><input type="checkbox" name="ch" value="2" checked>Chapter 2: Proofs</label><label><input type="checkbox" name="ch" value="3" checked>Chapter 3: Sets</label><label><input type="checkbox" name="ch" value="4" checked>Chapter 4: Relations</label><label><input type="checkbox" name="ch" value="5" checked>Chapter 5: Functions</label><label><input type="checkbox" name="ch" value="6" checked>Chapter 6: Induction</label><label><input type="checkbox" name="ch" value="9" checked>Chapter 9: Binary Operations</label><button class="btn" type="button" id="al">تحديد / إلغاء الكل</button>
+
+
+</fieldset>
+<fieldset><legend>نوع الأسئلة</legend>
+<label><input type="radio" name="ty" value="m" checked> اختيار من متعدد فقط</label>
+<label><input type="radio" name="ty" value="w"> مقالي فقط</label>
+<label><input type="radio" name="ty" value="b"> النوعان معًا</label></fieldset>
+<fieldset><legend>عدد الأسئلة</legend>
+<label><input type='radio' name='n' value='10'>10</label><label><input type='radio' name='n' value='20' checked>20</label><label><input type='radio' name='n' value='30'>30</label><label><input type='radio' name='n' value='50'>50</label><label><input type='radio' name='n' value='0'>الكل</label></fieldset>
+<p id="er" style="color:var(--red);margin:0"></p>
+<button class="btn" id="go">ابدأ التدريب</button>
+</section>
+<div class="bar"><b id="pg">0 / 0</b><div class="trk"><i id="tr"></i></div><b id="ok">✓ 0</b></div>
+<div id="nav"><a href="#s0">1 Basics</a><a href="#s1">1 Equivalences</a><a href="#s2">1 Quantifiers</a><a href="#s3">2 Proofs</a><a href="#s4">3 Sets</a><a href="#s5">4 Relations</a><a href="#s6">5 Functions</a><a href="#s7">6 Induction</a><a href="#s8">9 Binary Ops</a><a href="#sw">كتابي</a><button class="btn" id="hm">الرئيسية</button><button class="btn" id="sh">ترتيب الخيارات: ثابت</button></div>
+<div id="app"></div>
+<div id="res"><div id="sc"></div><p id="msg"></p><button class="btn" id="rw">أعد الأسئلة الخاطئة فقط</button><button class="btn" id="ra">ابدأ من جديد</button></div>
+</main>
+<script>
+const S=[["Chapter 1 – Logic: Basics",[
+["Which of the following is a statement?","x + 3 = 5|What time is it?|The number 7 is prime",2,"الجملة الخبرية لها قيمة صدق محددة. المعادلة x+3=5 تعتمد على x، والسؤال ليس خبرًا."],
+["P: It is cold. Q: It is sunny. “It is cold but not sunny” is:","P ∨ ¬Q|P ∧ ¬Q|¬P ∧ Q",1,"كلمة but تعني ∧. فتصبح: P ∧ ¬Q."],
+["P is true and Q is false. The truth value of P ⇒ Q is:","True|False|Cannot be determined",1,"الشرطية تكون خاطئة في حالة واحدة فقط: T ⇒ F."],
+["If P is false, then P ⇒ Q is:","True|False|Cannot be determined",0,"المقدمة الخاطئة تجعل الشرطية صحيحة دائمًا (vacuous truth)."],
+["A is true, B is false. The truth value of (A ∨ B) ∧ ¬(A ∧ B) is:","True|False|Cannot be determined",0,"A∨B = T، و A∧B = F فـ ¬(A∧B) = T. إذن T ∧ T = T."],
+["If P ⇒ Q is true and Q is false, then P is:","True|False|Cannot be determined",1,"لو كانت P صحيحة لأصبحت P⇒Q خاطئة (T⇒F). إذن P خاطئة (modus tollens)."],
+["The number of rows in the truth table of a statement with 3 variables is:","6|8|9",1,"عدد الصفوف 2ⁿ، أي 2³ = 8."],
+["“7 is prime or 9 is prime” is:","True|False|Cannot be determined",0,"الـ or تكفي فيها عبارة صحيحة واحدة، و 7 عدد أولي."],
+["P ⇔ Q is true exactly when:","P and Q have the same truth value|P is true|P and Q have different truth values",0,"التكافؤ صحيح عندما تتفق P و Q في القيمة (TT أو FF)."],
+["The converse of P ⇒ Q is:","Q ⇒ P|¬P ⇒ ¬Q|¬Q ⇒ ¬P",0,"العكس (converse) يبدّل المقدمة والنتيجة فقط: Q⇒P."],
+["The contrapositive of P ⇒ Q is:","Q ⇒ P|¬P ⇒ ¬Q|¬Q ⇒ ¬P",2,"المعاكس الإيجابي: نبدّل ونُنفي الطرفين، ¬Q⇒¬P، ويكافئ الأصل."],
+["Which is NOT equivalent to P ⇒ Q?","¬Q ⇒ ¬P|¬P ∨ Q|Q ⇒ P",2,"Q⇒P هو العكس وليس مكافئًا. الباقي مكافئان للأصل."],
+["Which of the following is a tautology?","P ∧ ¬P|P ∨ ¬P|P ⇒ ¬P",1,"P∨¬P صحيحة دائمًا. الأولى تناقض (contradiction)."],
+["Which of the following is a tautology?","(P ∧ Q) ⇒ P|P ⇒ (P ∧ Q)|P ∧ ¬Q",0,"لو كانت P∧Q صحيحة فـ P صحيحة بالتأكيد، فلا تكون الشرطية خاطئة أبدًا."],
+["Which of the following is a contradiction?","P ∨ ¬P|P ⇒ P|P ∧ ¬P",2,"P∧¬P خاطئة دائمًا لأن P و ¬P لا تجتمعان صحيحتين."],
+["P ⇒ (P ∨ Q) is:","a tautology|a contradiction|neither",0,"إذا كانت P خاطئة فالشرطية T، وإذا كانت P صحيحة فـ P∨Q صحيحة. إذن صحيحة دائمًا."],
+["The inverse of P ⇒ Q is:","Q ⇒ P|¬P ⇒ ¬Q|¬Q ⇒ ¬P",1,"المعكوس (inverse) ننفي فيه الطرفين دون تبديل: ¬P⇒¬Q."],
+["Which statement is false?","2+2=4 and 3 is odd|2+2=5 or 3 is odd|2+2=5 and 3 is odd",2,"∧ تحتاج الطرفين صحيحين، و 2+2=5 خاطئة."],
+["P ⇒ Q is false and P is true. Then Q is:","True|False|Cannot be determined",1,"الشرطية الخاطئة حالتها الوحيدة T⇒F، فتكون Q خاطئة."],
+["If P is true, then P ∨ Q is:","True|False|Cannot be determined",0,"∨ تكفي فيها عبارة صحيحة واحدة."],
+["P ∨ Q is true and P is false. Then Q is:","True|False|Cannot be determined",0,"لا بد أن تكون إحدى العبارتين صحيحة، و P خاطئة، إذن Q صحيحة."],
+["The truth table of a statement with 4 variables has how many rows?","8|16|12",1,"2⁴ = 16."],
+["If T is a tautology, P ∧ T is equivalent to:","P|T|F",0,"قانون الهوية: P∧T ≡ P لأن T لا تغيّر النتيجة."]]],
+["Chapter 1 – Logic: Equivalences & Negation",[
+["¬(P ⇒ Q) is logically equivalent to:","¬P ⇒ ¬Q|P ∧ ¬Q|¬P ∨ Q",1,"نفي الشرطية = المقدمة صحيحة والنتيجة خاطئة: P ∧ ¬Q. (خطأ شائع: ¬P⇒¬Q)."],
+["¬(P ∨ Q) is logically equivalent to:","¬P ∨ ¬Q|¬P ∧ ¬Q|P ∧ Q",1,"قانون دي مورغان: ننفي الطرفين ونقلب ∨ إلى ∧."],
+["¬(P ∧ Q) is logically equivalent to:","¬P ∧ ¬Q|¬P ∨ ¬Q|P ∨ Q",1,"دي مورغان: ننفي الطرفين ونقلب ∧ إلى ∨."],
+["P ⇒ Q is logically equivalent to:","P ∨ Q|¬P ∨ Q|P ∧ ¬Q",1,"P⇒Q تكون خاطئة فقط عند T⇒F، وهذا يطابق ¬P∨Q."],
+["P ∧ (Q ∨ R) is logically equivalent to:","(P ∧ Q) ∨ R|(P ∨ Q) ∧ (P ∨ R)|(P ∧ Q) ∨ (P ∧ R)",2,"قانون التوزيع: ∧ توزّع على ∨."],
+["¬(P ⇔ Q) is logically equivalent to:","(P ∧ ¬Q) ∨ (¬P ∧ Q)|(P ∧ Q) ∨ (¬P ∧ ¬Q)|P ⇒ Q",0,"التكافؤ خاطئ عندما يختلف P و Q، وهذا ما تعبّر عنه الإجابة الأولى (XOR)."],
+["P ∨ (P ∧ Q) is equivalent to:","P|Q|P ∧ Q",0,"قانون الامتصاص: النتيجة P دائمًا."],
+["(P ∨ ¬Q) ∧ (P ∨ Q) is equivalent to:","Q|P|P ∧ Q",1,"نوزّع: P ∨ (¬Q ∧ Q) = P ∨ F = P. انتبه: الرمز بين الطرفين ∨ وليس ∧."],
+["Negation of “If f is differentiable at a, then f is continuous at a”:","If f is not differentiable, then f is not continuous|f is differentiable at a and not continuous at a|If f is not continuous, then f is not differentiable",1,"نفي P⇒Q هو P∧¬Q. الخيار الأول هو inverse والثالث هو contrapositive (وكلاهما ليس النفي)."],
+["P ⇔ Q is equivalent to:","(P ⇒ Q) ∧ (Q ⇒ P)|(P ⇒ Q) ∨ (Q ⇒ P)|P ∧ Q",0,"التكافؤ شرطيتان في الاتجاهين معًا (∧)."],
+["¬(¬P ∨ Q) is equivalent to:","P ∨ ¬Q|P ∧ ¬Q|¬P ∧ Q",1,"دي مورغان: ¬(¬P)∧¬Q = P∧¬Q."],
+["P ∧ (P ∨ Q) is equivalent to:","P|Q|P ∨ Q",0,"قانون الامتصاص."],
+["(P ⇒ Q) ∧ (P ⇒ ¬Q) is equivalent to:","¬P|P|Q",0,"≡ P⇒(Q∧¬Q) ≡ P⇒F ≡ ¬P ∨ F ≡ ¬P."],
+["Negation of “n is even and n > 5”:","n is odd and n ≤ 5|n is odd or n ≤ 5|n is even or n > 5",1,"دي مورغان: ¬(A∧B) = ¬A∨¬B."],
+["Negation of “If it rains, the match is cancelled”:","If it does not rain, the match is not cancelled|It rains and the match is not cancelled|The match is cancelled and it does not rain",1,"¬(P⇒Q) ≡ P∧¬Q."],
+["Negation of “Ali passed Math or Physics”:","Ali failed Math and Physics|Ali failed Math or Physics|Ali passed Math and Physics",0,"¬(A∨B) = ¬A∧¬B: رسب في الاثنين."],
+["The converse of “If it rains, the road is wet” is:","If the road is wet, then it rains|If it does not rain, the road is not wet|If the road is not wet, then it does not rain",0,"العكس converse يبدّل المقدمة والنتيجة فقط."],
+["The contrapositive of “If it rains, the road is wet” is:","If the road is wet, then it rains|If it does not rain, the road is not wet|If the road is not wet, then it does not rain",2,"المعاكس الإيجابي: ننفي الطرفين ونبدّلهما، ويكافئ الجملة الأصلية."],
+["(P ∧ Q) ∨ (P ∧ ¬Q) is equivalent to:","P|Q|F",0,"P ∧ (Q ∨ ¬Q) ≡ P ∧ T ≡ P."]]],
+["Chapter 1 – Logic: Quantifiers",[
+["The negation of (∀x∈Z)(x² ≥ x) is:","(∃x∈Z)(x² ≥ x)|(∀x∈Z)(x² ≤ x)|(∃x∈Z)(x² < x)",2,"ننفي ∀ فتصبح ∃، وننفي x²≥x فتصبح x²<x."],
+["The negation of (∃x∈R)(x² = −1) is:","(∃x∈R)(x² ≠ −1)|(∀x∈R)(x² ≠ −1)|(∀x∈R)(x² = −1)",1,"∃ تصبح ∀ والمساواة تصبح ≠."],
+["The negation of “All students passed” is:","No student passed|Some student did not pass|Some student passed",1,"نفي ∀ هو ∃ مع نفي الخبر: يوجد طالب لم ينجح."],
+["Which statement is true?","(∃!x∈Z)(x² = 4)|(∃!x∈Z)(x + 3 = 5)|(∃!x∈Z)(x² = −4)",1,"x+3=5 له حل وحيد x=2. أما x²=4 فله حلان (±2)، و x²=−4 لا حل له."],
+["Which statement is true?","(∀x∈R)(x² > 0)|(∀x∈R)(x² ≥ 0)|(∀x∈R)(x > x²)",1,"x²≥0 دائمًا. الأولى تفشل عند x=0، والثالثة تفشل عند x=2."],
+["The truth set of {x∈Z : |x| < 0} is:","∅|{0}|Z",0,"القيمة المطلقة لا تكون سالبة، فلا يوجد أي عدد يحقق الشرط."],
+["The truth set of {x∈Z : x² < 10} is:","{−3,…,3}|{0,1,2,3}|{−2,…,2}",0,"3²=9<10 و 4²=16 لا تحقق. إذن من −3 إلى 3."],
+["(∃y∈Z)(∀x∈Z)(x + y = 0) is:","True|False|Cannot be determined",1,"يجب أن يكون y=−x لكل x في وقت واحد، وهذا مستحيل. (عكس الترتيب ∀x∃y صحيح)."],
+["A counterexample to (∀n∈N)(n² > n) is:","n = 1|n = 2|n = 3",0,"1² = 1 وليست أكبر من 1. المثال المضاد يجعل الجملة خاطئة."],
+["The negation of (∀x∈R)(∃y∈R)(x + y = 0) is:","(∃x∈R)(∀y∈R)(x + y ≠ 0)|(∀x∈R)(∃y∈R)(x + y ≠ 0)|(∃x∈R)(∃y∈R)(x + y ≠ 0)",0,"نقلب كل كمية (∀↔∃) وننفي الجملة الأخيرة."],
+["(∀x∈Z)(∃y∈Z)(x + y = 0) is:","True|False|Cannot be determined",0,"لكل x نختار y = −x."],
+["(∃!x∈R)(2x + 1 = 7) is:","True|False|Cannot be determined",0,"الحل الوحيد x = 3."],
+["The truth set of {x∈N : x + 2 = 5} is:","{3}|{−3}|∅",0,"x = 3 عدد طبيعي ويحقق المعادلة."],
+["The truth set of {x∈Z : x² = 9} is:","{3}|{−3, 3}|{9}",1,"3² = 9 و (−3)² = 9."],
+["Which statement is false?","(∃x∈Z)(x² = 4)|(∀x∈Z)(x² = 4)|(∃x∈Z)(x² = 0)",1,"∀ تفشل بمثال مضاد، مثل x = 1."],
+["The negation of (∀x∈R)(x² > 0) is:","(∃x∈R)(x² ≤ 0)|(∀x∈R)(x² ≤ 0)|(∃x∈R)(x² < 0)",0,"∀ تصبح ∃ والعلاقة > تصبح ≤ (وليس <). والجملة الأصلية خاطئة عند x = 0."],
+["Which statement is true?","(∃x∈N)(x + 1 = 0)|(∀x∈N)(x < 0)|(∃x∈Z)(x + 1 = 0)",2,"x = −1 عدد صحيح يحقق المعادلة، أما في N فلا يوجد حل."]]],
+["Chapter 2 – Proofs",[
+["To prove by contraposition “if n² is even, then n is even”, we prove:","if n is even, then n² is even|if n is odd, then n² is odd|if n² is odd, then n is even",1,"المعاكس الإيجابي: ننفي الطرفين ونبدّلهما."],
+["To prove by contraposition “if 3n+2 is odd, then n is odd”, we prove:","if n is even, then 3n+2 is even|if n is odd, then 3n+2 is odd|if 3n+2 is even, then n is odd",0,"ننفي odd فتصبح even في الطرفين ونبدّلهما."],
+["To prove P ⇒ Q by contradiction we assume:","¬P ∧ Q|P ∧ ¬Q|¬P ⇒ ¬Q",1,"نفترض أن P صحيحة و Q خاطئة، ثم نصل إلى تناقض."],
+["The sum of two odd integers is:","odd|even|can be either",1,"(2a+1)+(2b+1) = 2(a+b+1) وهو زوجي."],
+["If n = 2k, then n²/2 + 1 equals:","2k² + 1|4k² + 1|2k + 1",0,"n² = 4k² فيكون n²/2 = 2k² (وليس 4k). الناتج 2k²+1 فردي."],
+["In 54 = 2a + (2b + 1), why use different letters a and b?","The two integers are independent|To make it longer|It does not matter",0,"العددان مستقلان. استخدام نفس k يفرض علاقة بينهما ويُنقص الدرجة."],
+["The product of two odd integers is:","odd|even|can be either",0,"(2a+1)(2b+1) = 2(2ab+a+b) + 1 وهو فردي."],
+["The product of an even integer and any integer is:","even|odd|can be either",0,"(2k)·m = 2(km) زوجي."],
+["If n = 2k + 1, then n² equals:","4k² + 4k + 1|4k² + 1|2k² + 1",0,"(2k+1)² = 4k²+4k+1 (لا تنسَ الحد الأوسط)."],
+["A proof that starts “Let n = 2k” is about:","even integers|odd integers|any integer",0,"n = 2k تعني أن n زوجي."],
+["In a proof by contradiction, reaching a contradiction shows that:","the assumption is false|the assumption is true|nothing",0,"التناقض يعني أن الافتراض خاطئ، فتكون الجملة الأصلية صحيحة."],
+["To prove “if n is odd then n² is odd” directly, we start with:","n = 2k + 1|n = 2k|n² = 2k + 1",0,"البرهان المباشر يبدأ بالمقدمة: n فردي، أي n = 2k+1."],
+["Which technique starts by assuming P ∧ ¬Q?","Proof by contradiction|Direct proof|Proof by cases",0,"في التناقض نفترض أن P صحيحة و Q خاطئة ثم نصل إلى تناقض."],
+["To prove P ⇔ Q we must prove:","P ⇒ Q and Q ⇒ P|P ⇒ Q only|¬P ⇒ ¬Q only",0,"التكافؤ شرطية في الاتجاهين."],
+["A proof by cases for all integers n can consider:","n even and n odd|n > 0 only|n = 1 only",0,"كل عدد صحيح إما زوجي أو فردي، فنغطي كل الحالات."],
+["If n is odd, then:","n = 2k + 1 for some integer k|n = 2k for some integer k|n = k² for some integer k",0,"تعريف العدد الفردي: 2k+1."],
+["√2 is irrational is usually proved by:","contradiction|direct proof|induction",0,"نفترض √2 = a/b في أبسط صورة ونصل إلى تناقض."],
+["The square of an even integer is:","even|odd|can be either",0,"(2k)² = 4k² = 2(2k²) زوجي."]]],
+["Chapter 3 – Sets",[
+["Let A = {1, 2, 3}. How many subsets does A have?","6|8|9",1,"عدد المجموعات الجزئية 2ⁿ = 2³ = 8، وتشمل ∅ و A."],
+["Which statement is true for every set A?","∅ ⊆ A|∅ ∈ A|A ⊂ A (proper subset)",0,"المجموعة الخالية جزئية من أي مجموعة. و A ⊆ A لكنها ليست proper."],
+["A = {1,2,3}, B = {2,3,4}. A ∩ B equals:","{2,3}|{1,2,3,4}|{1,4}",0,"التقاطع: العناصر المشتركة بين A و B."],
+["With the same A and B, A − B equals:","{1}|{4}|{1,4}",0,"A−B هي عناصر A التي ليست في B."],
+["(A ∩ B)′ equals:","A′ ∪ B′|A′ ∩ B′|A ∪ B",0,"قانون دي مورغان للمجموعات: نأخذ المتمم ونبدّل ∩ بـ ∪."],
+["If |A| = 2 and |B| = 3, then |A × B| equals:","5|6|9",1,"حاصل الضرب الديكارتي عدد عناصره 2·3 = 6."],
+["The power set P(A) of A = {a, b} is:","{∅,{a},{b},{a,b}}|{{a},{b}}|{a,b}",0,"P(A) هي مجموعة كل المجموعات الجزئية، وعددها 4."],
+["A ∪ B for A = {1,2}, B = {2,3} is:","{1,2,3}|{2}|{1,3}",0,"الاتحاد يجمع كل العناصر بدون تكرار."],
+["A ⊆ B and B ⊆ A together mean:","A = B|A ⊂ B (proper)|A ∩ B = ∅",0,"تعريف تساوي المجموعات: كل منهما جزئية من الأخرى."],
+["The complement A′ (in universe U) is:","all elements of U not in A|A ∩ U|U ∪ A",0,"المتمم هو ما ليس في A داخل U."],
+["A × B = ∅ if and only if:","A = ∅ or B = ∅|A = ∅ and B = ∅|A = B",0,"لا توجد أزواج إذا كانت إحدى المجموعتين خالية."],
+["As ordered pairs, is (1,2) = (2,1)?","No|Yes|Depends on the universe",0,"الزوج المرتب يهتم بالترتيب، فهما مختلفان."]]],
+["Chapter 4 – Relations",[
+["R is reflexive on A if:","(a,a) ∈ R for all a ∈ A|(a,b) ∈ R ⇒ (b,a) ∈ R|R = ∅",0,"الانعكاسية: كل عنصر مرتبط بنفسه."],
+["R is symmetric if:","(a,b) ∈ R ⇒ (b,a) ∈ R|(a,a) ∈ R for all a|(a,b),(b,c) ∈ R ⇒ (a,c) ∈ R",0,"التماثل: لو (a,b) في R فيجب (b,a) أيضًا."],
+["R is transitive if:","(a,b),(b,c) ∈ R ⇒ (a,c) ∈ R|(a,a) ∈ R for all a|(a,b) ∈ R ⇒ (b,a) ∈ R",0,"التعدي: a→b و b→c تعني a→c."],
+["An equivalence relation is:","reflexive, symmetric and transitive|reflexive and symmetric only|symmetric and transitive only",0,"علاقة التكافؤ تجمع الخصائص الثلاث معًا."],
+["A = {1,2,3}, R = {(1,1),(2,2)}. R is:","not reflexive|reflexive|an equivalence relation",0,"ينقص (3,3)، فليست انعكاسية."],
+["The equivalence classes of an equivalence relation on A:","form a partition of A|may overlap|are always singletons",0,"الأصناف متفرقة ومجموعها A، أي تقسيم (partition)."],
+["If R = {(1,2),(2,3)}, then R⁻¹ equals:","{(2,1),(3,2)}|{(1,2),(2,3)}|{(1,3)}",0,"المعكوس نبدّل فيه ترتيب كل زوج."],
+["Dom(R) for R = {(1,a),(2,b),(1,c)} is:","{1,2}|{a,b,c}|{1,2,a,b,c}",0,"المجال هو المركبات الأولى فقط."],
+["The relation “=” on Z is:","an equivalence relation|not symmetric|not reflexive",0,"a=a وإذا a=b فإن b=a وإذا a=b وb=c فإن a=c."],
+["The relation “<” on Z is:","transitive but not reflexive|reflexive|symmetric",0,"a<a خاطئة فلا انعكاس، و a<b و b<c تعطي a<c."],
+["Congruence modulo d on Z is:","an equivalence relation|only reflexive|not transitive",0,"التطابق بالقياس d يحقق الانعكاس والتماثل والتعدي."]]],
+["Chapter 5 – Functions",[
+["A relation f from A to B is a function if:","every a ∈ A has exactly one image in B|every b ∈ B has exactly one preimage|f is symmetric",0,"الدالة: كل عنصر في المجال له صورة واحدة فقط."],
+["f is one-to-one if:","f(x₁) = f(x₂) ⇒ x₁ = x₂|every b has a preimage|f(x) = x",0,"الأحادية: لا عنصرين مختلفين لهما نفس الصورة."],
+["f : A → B is onto if:","every b ∈ B equals f(a) for some a|f(x₁) = f(x₂) ⇒ x₁ = x₂|Dom(f) = B",0,"الشمولية: كل عنصر في المدى المصاحب له أصل."],
+["f(x) = 2x + 1 from R to R is:","one-to-one and onto|one-to-one but not onto|onto but not one-to-one",0,"نحل y = 2x+1 فنجد x = (y−1)/2 لكل y، وهي أحادية أيضًا."],
+["f(x) = x² from R to R is:","not one-to-one|one-to-one|onto",0,"f(2) = f(−2) = 4، فليست أحادية (وليست شاملة أيضًا)."],
+["f(x) = x + 1, g(x) = 2x. (g ∘ f)(3) equals:","8|7|6",0,"(g∘f)(3) = g(f(3)) = g(4) = 8."],
+["f has an inverse function iff f is:","one-to-one and onto|one-to-one only|onto only",0,"الدالة العكسية تحتاج أحادية وشاملة (تقابل)."],
+["The domain of f : A → B is:","A|B|A × B",0,"المجال Dom(f) هو A، والمجال المصاحب codomain هو B."],
+["The inverse of f(x) = x + 3 is:","x − 3|x + 3|1/(x + 3)",0,"نحل y = x+3 فنجد x = y−3."],
+["If f : A → B and g : B → C, then g ∘ f is a function from:","A to C|B to B|C to A",0,"نطبّق f أولًا ثم g."],
+["x ↦ |x| from R to R is:","not one-to-one|one-to-one|onto",0,"f(1) = f(−1) = 1، وليست شاملة أيضًا."]]],
+["Chapter 6 – Mathematical Induction",[
+["A proof by induction has two steps:","basis step and inductive step|direct and contradiction|contrapositive and cases",0,"خطوة الأساس وخطوة الاستقراء."],
+["In the inductive step we assume P(k) and prove:","P(k+1)|P(k−1)|P(2k)",0,"نفترض صحة P(k) ونثبت صحة P(k+1)."],
+["The basis step for 1 + 2 + … + n = n(n+1)/2 checks:","n = 1|n = 0 only|n = k+1",0,"عند n=1: الطرف الأيسر 1 والأيمن 1·2/2 = 1."],
+["1 + 2 + … + n equals:","n(n+1)/2|n²|n(n−1)/2",0,"مجموع الأعداد الطبيعية الأولى n(n+1)/2."],
+["To prove 2ⁿ > n² for n ≥ 5 by induction, the basis step is:","n = 5|n = 1|n = 4",0,"في الاستقراء المعمم نبدأ من أول قيمة n₀ = 5."],
+["The inductive hypothesis is:","assume P(k) is true|assume P(k+1) is true|assume P(1) is false",0,"نفترض صحة P(k) لعدد k ثم نبرهن P(k+1)."],
+["Induction proves statements for:","all natural numbers n ≥ n₀|all real numbers|all integers",0,"الاستقراء يعمل على الأعداد الطبيعية ابتداءً من n₀."],
+["1 + 3 + … + (2n − 1) equals:","n²|2n|n(n + 1)",0,"مجموع أول n عدد فردي = n²."]]],
+["Chapter 9 – Binary Operations",[
+["A binary operation * on a set A is a function:","A × A → A|A → A × A|A → R",0,"العملية الثنائية تأخذ عنصرين من A وتعطي عنصرًا في A (إغلاق)."],
+["Is subtraction a binary operation on N?","No, not closed|Yes|Only on Z",0,"3 − 5 = −2 ليس عددًا طبيعيًا، فلا يتحقق الإغلاق."],
+["* is commutative if:","a*b = b*a for all a, b|(a*b)*c = a*(b*c)|a*e = a",0,"الإبدال: ترتيب العنصرين لا يؤثر."],
+["* is associative if:","(a*b)*c = a*(b*c)|a*b = b*a|a*b ∈ A",0,"الدمج: طريقة تجميع الأقواس لا تؤثر."],
+["The identity element for + on Z is:","0|1|−1",0,"a + 0 = a لكل عدد صحيح a."],
+["Addition on N is:","a binary operation, commutative and associative|not closed|not associative",0,"مجموع عددين طبيعيين طبيعي، والإبدال والدمج متحققان."],
+["Subtraction on Z is:","not commutative|commutative|associative",0,"3−5 ≠ 5−3."],
+["The identity element for multiplication on R is:","1|0|−1",0,"a·1 = a لكل a."]]]];
+const W=[
+["Truth table: show ¬(P⇔Q) ≡ (P∧¬Q)∨(¬P∧Q)","P Q | P⇔Q | ¬(P⇔Q) | P∧¬Q | ¬P∧Q | OR\nT T |  T   |   F    |  F   |  F   | F\nT F |  F   |   T    |  T   |  F   | T\nF T |  F   |   T    |  F   |  T   | T\nF F |  T   |   F    |  F   |  F   | F\nعمودا ¬(P⇔Q) وآخر عمود متطابقان، إذن التكافؤ صحيح."],
+["Without a truth table: ¬(¬P ∧ Q) ∧ (P ∨ Q) ≡ P","¬(¬P∧Q) ≡ P ∨ ¬Q (De Morgan)\n(P∨¬Q) ∧ (P∨Q) ≡ P ∨ (¬Q∧Q) (distributive)\n≡ P ∨ F ≡ P  ∎\nانتبه: بعد التوزيع الرمز ∨ وليس ∧."],
+["Negation: If f is continuous at a, then the limit exists at a.","f is continuous at a AND the limit does not exist at a.\nالقاعدة: ¬(P⇒Q) ≡ P∧¬Q."],
+["Prove: if n is even, then n²/2 + 1 is odd.","Let n = 2k. Then n² = 4k², so n²/2 + 1 = 2k² + 1.\nLet m = k². Then 2m + 1 is odd.  ∎"],
+["Prove by contraposition: if 3n+2 is odd, then n is odd.","Contrapositive: if n is even, then 3n+2 is even.\nLet n = 2k. Then 3n+2 = 6k+2 = 2(3k+1), and 3k+1 is an integer,\nso 3n+2 is even. Hence the original statement is true.  ∎\nلا تكتب by contradiction في نهاية برهان التعاكس."],
+["Prove by contradiction: 54 cannot be written as the sum of one odd and one even integer.","Suppose 54 = a + b with a even, b odd. Let a = 2k and b = 2j + 1.\nThen 54 = 2k + 2j + 1 = 2(k+j) + 1, which is odd.\nBut 54 = 2(27) is even, a contradiction.  ∎\nاستخدم حرفين مختلفين k و j."],
+["Negation: ∀x∈R ∃y∈R (x + y = 0)","∃x∈R ∀y∈R (x + y ≠ 0)\nنقلب كل كمية ونفي الجملة في الآخر."],
+["Show P ⇒ (Q ⇒ P) is a tautology (no table).","P⇒(Q⇒P) ≡ ¬P ∨ (¬Q ∨ P) ≡ (¬P ∨ P) ∨ ¬Q ≡ T ∨ ¬Q ≡ T  ∎"],
+["Prove √2 is irrational.","Assume √2 = a/b in lowest terms. Then a² = 2b², so a² is even, so a is even: a = 2c.\nThen 4c² = 2b², b² = 2c², so b is even. Both even contradicts lowest terms.  ∎"],
+["Truth table: show (P⇒Q) ∧ (Q⇒P) ≡ P⇔Q","P Q | P⇒Q | Q⇒P | AND | P⇔Q\nT T |  T  |  T  |  T  |  T\nT F |  F  |  T  |  F  |  F\nF T |  T  |  F  |  F  |  F\nF F |  T  |  T  |  T  |  T\nالعمودان الأخيران متطابقان."],
+["Without a truth table: P ∧ (¬P ∨ Q) ≡ P ∧ Q","P∧(¬P∨Q) ≡ (P∧¬P) ∨ (P∧Q) (distributive)\n≡ F ∨ (P∧Q) ≡ P∧Q  ∎"],
+["Negation: If x > 2, then x² > 4.","x > 2 AND x² ≤ 4.\n¬(P⇒Q) ≡ P∧¬Q."],
+["Prove: if n is odd, then n² + 1 is even.","Let n = 2k+1. Then n² + 1 = 4k²+4k+2 = 2(2k²+2k+1).\nSince 2k²+2k+1 is an integer, n²+1 is even.  ∎"],
+["Prove by contraposition: if n² is even, then n is even.","Contrapositive: if n is odd, then n² is odd.\nLet n = 2k+1. Then n² = 4k²+4k+1 = 2(2k²+2k)+1, which is odd.  ∎"],
+["Prove by contradiction: there are no integers a, b with 18a + 6b = 1.","Suppose 18a + 6b = 1. Then 6(3a + b) = 1.\nSo 6 divides 1, which is impossible.  ∎"],
+["Prove: the sum of two odd integers is even.","Let a = 2k+1 and b = 2j+1 (different letters).\nThen a + b = 2(k + j + 1), which is even.  ∎"],
+["Prove: A ∩ B ⊆ A.","Let x ∈ A ∩ B. Then x ∈ A and x ∈ B.\nIn particular x ∈ A. Hence A ∩ B ⊆ A.  ∎"],
+["Prove the De Morgan law: (A ∩ B)′ = A′ ∪ B′.","x ∈ (A∩B)′ ⇔ ¬(x ∈ A ∧ x ∈ B) ⇔ (x ∉ A) ∨ (x ∉ B)\n⇔ x ∈ A′ ∨ x ∈ B′ ⇔ x ∈ A′ ∪ B′.  ∎"],
+["A = {1,2,3}. Is R = {(1,1),(2,2),(3,3),(1,2),(2,1)} an equivalence relation? Find the classes.","Reflexive: (1,1),(2,2),(3,3) all in R.\nSymmetric: (1,2) and (2,1) both in R.\nTransitive: (1,2),(2,1) ⇒ (1,1) ✓, (2,1),(1,2) ⇒ (2,2) ✓.\nSo R is an equivalence relation.\nClasses: [1] = [2] = {1,2}, [3] = {3}."],
+["Prove f(x) = 3x − 2 from R to R is one-to-one and onto.","One-to-one: 3a − 2 = 3b − 2 ⇒ 3a = 3b ⇒ a = b.\nOnto: given y ∈ R let x = (y+2)/3. Then f(x) = y.  ∎"],
+["Prove by induction: 1 + 2 + … + n = n(n+1)/2.","Basis: n = 1 gives 1 = 1·2/2.\nStep: assume true for k. Then\n1 + … + k + (k+1) = k(k+1)/2 + (k+1) = (k+1)(k+2)/2.\nSo it holds for k+1.  ∎"],
+["Find the inverse of f(x) = 2x + 5 on R.","Let y = 2x + 5. Then x = (y − 5)/2.\nSo f⁻¹(y) = (y − 5)/2."],
+["Prove: A ⊆ A ∪ B.","Let x ∈ A. Then x ∈ A or x ∈ B is true.\nSo x ∈ A ∪ B. Hence A ⊆ A ∪ B.  ∎"],
+["Show that f(x) = x² from R to R is not one-to-one.","f(2) = 4 = f(−2) but 2 ≠ −2.\nSo f is not one-to-one.  ∎"],
+["Prove by induction: 1 + 3 + … + (2n − 1) = n².","Basis: n = 1 gives 1 = 1².\nStep: assume true for k. Then\n1 + … + (2k − 1) + (2k + 1) = k² + 2k + 1 = (k + 1)².  ∎"]];
+const app=document.getElementById("app");let tot=0,done=0,good=0,qs=[],SH=false,CFG,SELM=new Set(),SELW=[];const CH=[1,1,1,2,2,2,1,1,2,1,1,1,2,2,2,2,3,3,4,5,6,5,3,5,6],CHS={1:[0,1,2],2:[3],3:[4],4:[5],5:[6],6:[7],9:[8]};
+function build(only){app.innerHTML="";qs=[];done=good=0;
+S.forEach(([t,L],si)=>{const items=L.filter(q=>only?only.includes(q):SELM.has(q));if(!items.length)return;
+app.insertAdjacentHTML("beforeend","<h2 id=s"+si+">"+t+"</h2>");
+items.forEach(q=>{const d=document.createElement("div");d.className="q";const p=document.createElement("p");p.textContent=q[0];d.append(p);
+const ex=document.createElement("div");ex.className="ex";
+(SH?q[1].split("|").map((o,i)=>[o,i]).sort(()=>Math.random()-.5):q[1].split("|").map((o,i)=>[o,i])).forEach(([o,oi],i)=>{const b=document.createElement("button");b.dataset.c=oi==q[2]?1:0;b.textContent=String.fromCharCode(97+i)+") "+o;
+b.onclick=()=>{[...d.querySelectorAll("button")].forEach((x,j)=>{x.disabled=true;if(x.dataset.c=="1")x.classList.add("ok")});
+const r=oi==q[2];if(!r)b.classList.add("no");q.r=r;ex.className="ex "+(r?"ok":"no");ex.textContent=(r?"✓ صحيح. ":"✗ خاطئة. الصحيح هو الخيار الأخضر. ")+q[3];done++;if(r)good++;upd()};d.append(b)});
+d.append(ex);app.append(d);q.s=t;qs.push(q)})});
+if(!only&&SELW.length){app.insertAdjacentHTML("beforeend","<h2 id=sw>أسئلة كتابية: اكتب حلك ثم قارن</h2>");
+W.forEach((w,wi)=>{if(!SELW.includes(wi))return;const k="w"+wi,e=document.createElement("div");e.className="q";const p=document.createElement("p");p.textContent=w[0];
+const t=document.createElement("textarea");t.rows=5;t.dir="ltr";t.placeholder="اكتب حلك هنا...";try{t.value=localStorage.getItem(k)||""}catch(_){}
+t.oninput=()=>{try{localStorage.setItem(k,t.value)}catch(_){}};
+const b=document.createElement("button");b.textContent="قارن بالحل ▾";const a=document.createElement("div");a.className="ans";a.hidden=true;a.textContent=w[1];
+b.onclick=()=>{a.hidden=!a.hidden;b.textContent=a.hidden?"قارن بالحل ▾":"أخفِ الحل ▴"};e.append(p,t,b,a);app.append(e)})}
+document.querySelectorAll("#nav a").forEach(a=>a.style.display=document.querySelector(a.getAttribute("href"))?"":"none");tot=qs.length;document.getElementById("res").style.display="none";upd()}
+function upd(){document.getElementById("pg").textContent=done+" / "+tot;document.getElementById("ok").textContent="✓ "+good;
+document.getElementById("tr").style.width=(tot?done/tot*100:0)+"%";
+if(done==tot&&tot){const r=document.getElementById("res");r.style.display="block";document.getElementById("sc").textContent=good+"/"+tot;
+const w=qs.filter(q=>!q.r).length;document.getElementById("msg").textContent=w?"لديك "+w+" أسئلة خاطئة. راجع: "+[...new Set(qs.filter(q=>!q.r).map(q=>q.s))].join(" | "):"ممتاز! كل الإجابات صحيحة.";
+document.getElementById("rw").style.display=w?"":"none"}}
+document.getElementById("rw").onclick=()=>{const w=qs.filter(q=>!q.r);w.forEach(q=>delete q.r);build(w);scrollTo(0,0)};
+document.getElementById("ra").onclick=()=>{S.forEach(s=>s[1].forEach(q=>delete q.r));build();scrollTo(0,0)};
+document.getElementById("sh").onclick=e=>{SH=!SH;e.target.textContent=SH?"ترتيب الخيارات: عشوائي":"ترتيب الخيارات: ثابت";S.forEach(s=>s[1].forEach(q=>delete q.r));build()};
+function pick(){const c=CFG,sh=a=>a.sort(()=>Math.random()-.5);let m=[],w=[];
+S.forEach((s,si)=>{if(c.ch.some(k=>CHS[k].includes(si)))s[1].forEach(q=>m.push(q))});W.forEach((x,i)=>{if(c.ch.includes(CH[i]))w.push(i)});
+let nm=c.t=="w"?0:m.length,nw=c.t=="m"?0:w.length;
+if(c.n){if(c.t=="b"){nw=Math.min(w.length,Math.round(c.n*.25));nm=Math.min(m.length,c.n-nw)}else if(c.t=="m")nm=Math.min(m.length,c.n);else nw=Math.min(w.length,c.n)}
+SELM=new Set(sh(m).slice(0,nm));SELW=sh(w).slice(0,nw)}
+document.getElementById("go").onclick=()=>{const f=document.getElementById("start"),er=document.getElementById("er");
+const ch=[...f.querySelectorAll("[name=ch]:checked")].map(x=>+x.value);
+if(!ch.length){er.textContent="اختر فصلًا واحدًا على الأقل.";return}er.textContent="";
+CFG={ch,t:f.querySelector("[name=ty]:checked").value,n:+f.querySelector("[name=n]:checked").value};
+S.forEach(s=>s[1].forEach(q=>delete q.r));pick();document.body.classList.add("go");build();scrollTo(0,0)};
+document.querySelectorAll("[name=ch]").forEach(i=>{const k=+i.value,n=S.reduce((a,s,si)=>a+(CHS[k].includes(si)?s[1].length:0),0)+CH.filter(x=>x==k).length;i.parentNode.insertAdjacentHTML("beforeend","<small>"+n+"</small>")});
+document.getElementById("al").onclick=()=>{const c=[...document.querySelectorAll("[name=ch]")],on=c.some(x=>!x.checked);c.forEach(x=>x.checked=on)};
+document.getElementById("hm").onclick=()=>{document.body.classList.remove("go");scrollTo(0,0)};
+</script></body></html>
